@@ -1,8 +1,7 @@
 # This Python file uses the following encoding: utf-8
-
 import cv2
 import mediapipe as mp
-from flask import Flask, jsonify
+
 
 # 初始化MediaPipe Face Mesh
 mp_face_mesh = mp.solutions.face_mesh
@@ -37,13 +36,7 @@ while cap.isOpened():
     # 按'q'键退出循环
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-app = Flask(__name__)
 
-@app.route('/get_landmarks', methods=['GET'])
-def get_landmarks():
-    # 您获取关键点坐标的现有代码
-    landmarks = [(x, y, z) for landmark in face_landmarks.landmark]
-    return jsonify({'landmarks': landmarks})
 # 释放资源
 cap.release()
 cv2.destroyAllWindows()
